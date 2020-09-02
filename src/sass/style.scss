@@ -1,0 +1,186 @@
+@import 'libs/bootstrap-reboot.min';
+@import 'libs/fonts';
+@import 'base/variables';
+@import 'base/media';
+
+* {
+    
+    font-family: 'Ex2.0', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper { 
+    background: url('../img/bg.jpg');
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 100;
+    line-height: 42px;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0px 1px 1px #000000;
+    margin-bottom: 24px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.item {
+    width: 320px;
+    display: flex; 
+    flex-direction: column;
+    text-align: center;
+}
+
+.cart {
+    position: relative;
+    width: 320px;
+    height: 509px; 
+    line-height: 1;
+    background: linear-gradient(135deg, transparent 38px, white 20px), 
+    linear-gradient(135deg, transparent 32px, $default-color 30px); 
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    border-bottom: 6px solid $default-color;
+    border-right: 6px solid $default-color; 
+    cursor: pointer;
+    &_selected {
+        border-color: $selected-color;
+        background: linear-gradient(135deg, transparent 38px, white 20px), 
+        linear-gradient(135deg, transparent 32px, $selected-color 30px); 
+    }
+    &_disabled {
+        border-color: $disabled-color;
+        background: linear-gradient(135deg, transparent 38px, white 20px), 
+        linear-gradient(135deg, transparent 32px, $disabled-color 30px); 
+    }
+
+    &__main {
+        position: absolute;
+        bottom: 0;
+        left: 6px;
+        width: 300px;
+        height: 420px;
+        background: url('../img/cat.jpg');
+        background-position-y: bottom;
+        background-position-x: 78%;
+        
+    }
+    &__info {
+        position: absolute;
+        top: -65px;
+        height: 160px;
+        margin: 0 51px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: start;      
+    }
+    &__box {
+       
+        height: 100%;
+        position: relative;
+        box-sizing: border-box;
+        background-image: linear-gradient(to right, transparent 15%, $default-color 0%, $default-color 100%), linear-gradient(to bottom, transparent 9%, $default-color 0%, $default-color 100%);
+        background-size: 100% 6px, 6px 100%, 6px 100%;
+        background-position: top left, top left, top right;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        &_selected {
+            background-image: linear-gradient(to right, transparent 15%, $selected-color 0%, $selected-color 100%), linear-gradient(to bottom, transparent 9%, $selected-color 0%, $selected-color 100%);
+        }
+        &_disabled {    
+            background-image: linear-gradient(to right, transparent 15%, $disabled-color 0%, $disabled-color 100%), linear-gradient(to bottom, transparent 9%, $disabled-color 0%, $disabled-color 100%);
+            opacity: .5;
+        }
+    }  
+    &__subtitle {
+        display: none;
+        font-size: 16px;
+        color: #666666; 
+        &_hover {
+            color: #E62E7A;
+        }    
+    }
+    &__header {
+        font-weight: 700;
+        font-size: 48px;
+        color: #000000;
+        margin-bottom: 0;
+    }
+    &__taste {
+        font-weight: 700;
+        font-size: 24px;
+        color: #000000;
+    }
+    &__gift {
+        text-align: left;
+        margin-top: 16px;
+        font-size: 14px;
+        color: #666666;
+        line-height: 16px;
+        span {
+            font-weight: bold;
+        }
+    }
+    &__round {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        width: 90px;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 100%;
+        background: $default-color;
+        &_selected {
+            background: $selected-color;
+        }
+        &_disabled {
+            background: $disabled-color;
+        }
+    }
+    &__weight {
+        padding-top: 20px;
+        text-align: center;
+            color: #FFFFFF;
+        div {
+            font-size: 38px;
+        }
+        p { 
+            font-size: 24px;
+        }
+    }   
+}
+
+.descr {
+    height: 38px ;
+    display: none;
+    font-size: 13px;
+    color: #fff;
+    margin-top: 14px;
+    &_disabled {
+        color: #FFFF66;
+    }
+    a {
+        color: $default-color;
+        &:hover {
+            color: $default-color;
+            text-decoration-line: underline;
+        }
+    }
+}
+
+.active {
+    display: block;
+}
+

@@ -1,0 +1,11 @@
+@media (max-width: 1024px) { 
+    .wrapper h1 {
+        font-size: 30px;
+    }
+    .container {
+        flex-wrap: wrap;
+    }
+    .item {
+        margin: 0 15px 15px 15px;
+    }
+}
