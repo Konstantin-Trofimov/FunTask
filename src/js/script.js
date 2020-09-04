@@ -1,5 +1,3 @@
-
-
 const cart = getArray('.cart'),
     box = getArray('.cart__box'),
     round = getArray('.cart__round'),
@@ -7,107 +5,100 @@ const cart = getArray('.cart'),
     descrSelected = getArray('.descr_selected'),
     descrDisabled = getArray('.descr_disabled'),
     cartSubtitle = getArray('.cart__subtitle_default'),
-    cartSubtitleHover = getArray('.cart__subtitle_hover');
+    cartSubtitleHover = getArray('.cart__subtitle_hover'),
+    cartLinks = document.querySelectorAll('.descr__link');
+
 
 function getArray(elem) {
     return Array.from(document.querySelectorAll(elem));
 }
 
-document.querySelectorAll('.descr__link').forEach((elem) => {
+document.querySelectorAll('.descr__link').forEach((elem, i) => {
     elem.addEventListener('click', (e) => {
         e.preventDefault();
-        let attr = event.target.parentElement.getAttribute('data-taste');
         let item = event.target.parentElement.previousElementSibling;
-        switchCondition(item, attr);
+        switchCondition(item, i);
     });
 });
 
-cart.forEach((item) => {
+cart.forEach((item, i) => {
     item.addEventListener('click', () => {
-        let attr = item.getAttribute('data-taste');
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            switchCondition(item, attr);
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/.test(navigator.userAgent)) {
+            switchCondition(item, i);
         } else {
             item.onmouseleave = () => {
-                switchCondition(item, attr);
+                switchCondition(item, i);
             }
         }
     });
 });
 
-function switchCondition(item, attr) {
-    changeDescription(item, attr);
-    if (item.classList.contains('is-default')) toSelected(attr);
-    else if (item.classList.contains('is-selected')) toDisabled(attr);
-    else backToSelected(attr);
+
+function switchCondition(item, i) {
+    changeDescription(item, i);
+    if (item.classList.contains('is-default')) toSelected(i);
+    else if (item.classList.contains('is-selected')) toDisabled(i);
+    else backToSelected(i);
 }
 
-function toSelected(attr) {
-    selected(attr, cart, 'cart_selected');
-    selected(attr, cart, 'is-selected');
-    selected(attr, cart, 'cart_selected');
-    selected(attr, box, 'cart__box_selected');
-    selected(attr, descrSelected, 'active');
-    selected(attr, round, 'cart__round_selected');
-    unSelected(attr, cart, 'is-default');
-    unSelected(attr, descrDefault, 'active');
+function toSelected(i) {
+    selected(i, cart, 'cart_selected');
+    selected(i, cart, 'is-selected');
+    selected(i, cart, 'cart_selected');
+    selected(i, box, 'cart__box_selected');
+    selected(i, descrSelected, 'active');
+    selected(i, round, 'cart__round_selected');
+    unSelected(i, cart, 'is-default');
+    unSelected(i, descrDefault, 'active');
 }
 
-function toDisabled(attr) {
-    selected(attr, cart, 'cart_disabled');
-    selected(attr, round, 'cart__round_disabled');
-    selected(attr, box, 'cart__box_disabled');
-    selected(attr, cartSubtitle, 'active');
-    selected(attr, descrDisabled, 'active');
-    unSelected(attr, cart, 'is-selected');
-    unSelected(attr, cart, 'cart_selected');
-    unSelected(attr, cart, 'cart__box_selected');
-    unSelected(attr, round, 'cart__round_selected');
-    unSelected(attr, cartSubtitleHover, 'active');
-    unSelected(attr, descrSelected, 'active');
+function toDisabled(i) {
+    selected(i, cart, 'cart_disabled');
+    selected(i, round, 'cart__round_disabled');
+    selected(i, box, 'cart__box_disabled');
+    selected(i, cartSubtitle, 'active');
+    selected(i, descrDisabled, 'active');
+    unSelected(i, cart, 'is-selected');
+    unSelected(i, cart, 'cart_selected');
+    unSelected(i, cart, 'cart__box_selected');
+    unSelected(i, round, 'cart__round_selected');
+    unSelected(i, cartSubtitleHover, 'active');
+    unSelected(i, descrSelected, 'active');
 }
 
-function backToSelected(attr) {
-    selected(attr, cart, 'is-selected');
-    selected(attr, cart, 'cart_selected');
-    selected(attr, box, 'cart__box_selected');
-    selected(attr, round, 'cart__round_selected');
-    selected(attr, descrSelected, 'active');
-    unSelected(attr, cart, 'cart_disabled');
-    unSelected(attr, box, 'cart__box_disabled');
-    unSelected(attr, round, 'cart__round_disabled');
-    unSelected(attr, descrDisabled, 'active');
+function backToSelected(i) {
+    selected(i, cart, 'is-selected');
+    selected(i, cart, 'cart_selected');
+    selected(i, box, 'cart__box_selected');
+    selected(i, round, 'cart__round_selected');
+    selected(i, descrSelected, 'active');
+    unSelected(i, cart, 'cart_disabled');
+    unSelected(i, box, 'cart__box_disabled');
+    unSelected(i, round, 'cart__round_disabled');
+    unSelected(i, descrDisabled, 'active');
 }
 
-function changeDescription(item, attr) {
+function changeDescription(item, i) {
     item.onmouseenter = () => {
         if (item.classList.contains('is-selected')) {
-            selected(attr, cartSubtitleHover, 'active');
-            unSelected(attr, cartSubtitle, 'active');
+            selected(i, cartSubtitleHover, 'active');
+            unSelected(i, cartSubtitle, 'active');
         }
     }
     item.onmouseleave = () => {
         if (item.classList.contains('is-selected')) {
-            selected(attr, cartSubtitle, 'active');
-            unSelected(attr, cartSubtitleHover, 'active');
+            selected(i, cartSubtitle, 'active');
+            unSelected(i, cartSubtitleHover, 'active');
         }
     }
 }
 
-function selected(attr, arr, elem) {
-    for (let i in arr) {
-        if (attr == arr[i].getAttribute('data-taste')) {
-            arr[i].classList.add(elem);
-        }
-    }
+function selected(i, arr, elem) {
+    arr[i].classList.add(elem);
 }
 
-function unSelected(attr, arr, elem) {
-    for (let i in arr) {
-        if (attr == arr[i].getAttribute('data-taste')) {
-            arr[i].classList.remove(elem);
-        }
-    }
+function unSelected(i, arr, elem) {
+    arr[i].classList.remove(elem);
 }
 
 
